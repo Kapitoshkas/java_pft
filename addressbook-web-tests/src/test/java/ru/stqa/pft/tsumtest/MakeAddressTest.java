@@ -16,10 +16,6 @@ public class MakeAddressTest {
     public void setUp() throws Exception {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    }
-    
-    @Test
-    public void testMakeNewAddress() {
         wd.get("https://omega.dev.tsum.com/login/");
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
@@ -29,6 +25,10 @@ public class MakeAddressTest {
         wd.findElement(By.id("password")).clear();
         wd.findElement(By.id("password")).sendKeys("123456");
         wd.findElement(By.xpath("//div[@class='popup__button']/button")).click();
+    }
+    
+    @Test
+    public void testMakeAddress() {
         wd.findElement(By.xpath("//div[@class='inner__content']//a[.='Мои адреса']")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[1]")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[1]/div/div/div[1]")).click();
