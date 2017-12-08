@@ -1,4 +1,4 @@
-package ru.stqa.pft.tsumtest;
+package ru.stqa.pft.tsumtest.model;
 
 public class AddressCreation {
     private final String street;

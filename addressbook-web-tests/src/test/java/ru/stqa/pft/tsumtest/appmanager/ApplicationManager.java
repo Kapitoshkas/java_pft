@@ -1,14 +1,13 @@
-package ru.stqa.pft.tsumtest;
+package ru.stqa.pft.tsumtest.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import ru.stqa.pft.tsumtest.model.AddressCreation;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
+public class ApplicationManager {
     FirefoxDriver wd;
 
     public static boolean isAlertPresent(FirefoxDriver wd) {
@@ -20,15 +19,14 @@ public class TestBase {
         }
     }
 
-    @BeforeMethod
-    public void setUp() throws Exception {
+    public void init() {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         wd.get("https://omega.dev.tsum.com/login/");
         login("moiseenkoartem@yandex.ru", "123456");
     }
 
-    private void login(String username, String password) {
+    public void login(String username, String password) {
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
         wd.findElement(By.name("email")).sendKeys(username);
@@ -39,11 +37,11 @@ public class TestBase {
         wd.findElement(By.xpath("//div[@class='popup__button']/button")).click();
     }
 
-    protected void submitAdressCreation() {
+    public void submitAdressCreation() {
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[7]/button")).click();
     }
 
-    protected void initAndfillNewAddress(AddressCreation addressCreation) {
+    public void initAndfillNewAddress(AddressCreation addressCreation) {
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[1]")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[1]/div/div/div[1]")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[1]/div/div/ul/li[1]/span")).click();
@@ -68,17 +66,15 @@ public class TestBase {
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[3]/input")).sendKeys(addressCreation.getApartment());
     }
 
-    protected void gotoAddressPage() {
+    public void gotoAddressPage() {
         wd.findElement(By.xpath("//div[@class='inner__content']//a[.='Мои адреса']")).click();
     }
 
-    protected void deleteAddress() {
+    public void deleteAddress() {
         wd.findElement(By.xpath("//div[@class='inner__main']//span[.='Удалить']")).click();
     }
 
-    @AfterMethod
-    public void tearDown() {
+    public void stop() {
         wd.quit();
     }
-
 }
