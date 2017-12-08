@@ -34,7 +34,7 @@ public class MakeAddressTest {
     @Test
     public void testMakeAddress() {
         gotoAddressPage();
-        initAndfillNewAddress("Улица", "555555", "5555", "5555", "5555");
+        initAndfillNewAddress(new AddressCreation("Улица", "555555", "5555", "5555", "5555"));
         submitAdressCreation();
     }
 
@@ -42,7 +42,7 @@ public class MakeAddressTest {
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[7]/button")).click();
     }
 
-    private void initAndfillNewAddress(String Street, String zip, String house, String structure, String apartment) {
+    private void initAndfillNewAddress(AddressCreation addressCreation) {
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[1]")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[1]/div/div/div[1]")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[1]/div/div/ul/li[1]/span")).click();
@@ -52,19 +52,19 @@ public class MakeAddressTest {
         wd.findElement(By.cssSelector("span.link.autocomplete__link")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[3]/div/input")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[3]/div/input")).clear();
-        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[3]/div/input")).sendKeys(Street);
+        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[3]/div/input")).sendKeys(addressCreation.getStreet());
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[4]/div/input")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[4]/div/input")).clear();
-        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[4]/div/input")).sendKeys(zip);
+        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[4]/div/input")).sendKeys(addressCreation.getZip());
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[1]/input")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[1]/input")).clear();
-        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[1]/input")).sendKeys(house);
+        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[1]/input")).sendKeys(addressCreation.getHouse());
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[2]/input")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[2]/input")).clear();
-        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[2]/input")).sendKeys(structure);
+        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[2]/input")).sendKeys(addressCreation.getStructure());
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[3]/input")).click();
         wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[3]/input")).clear();
-        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[3]/input")).sendKeys(apartment);
+        wd.findElement(By.xpath("//div[@class='pa-my-address__form']/div/div[2]/div/div/form/div[5]/div/div/div[3]/input")).sendKeys(addressCreation.getApartment());
     }
 
     private void gotoAddressPage() {
